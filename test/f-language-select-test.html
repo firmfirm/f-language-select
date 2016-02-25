@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../f-language-select.html">
+  </head>
+  <body>
+
+    <test-fixture id="f-language-select-fixture">
+      <template>
+        <f-language-select></f-language-select>
+      </template>
+    </test-fixture>
+
+    <script>
+      'use strict';
+      describe('<f-language-select>', function() {
+
+        var el;
+
+        beforeEach(function(done) {
+          el = fixture('f-language-select-fixture');
+          el.options = [ {lang:'lv',flag:'us'} ];
+          flush(done);
+        });
+
+        it('setting [languages] should set dropdown items', function() {
+          let items = el.querySelectorAll('paper-item');
+          expect(items).to.have.lengthOf(1);
+          var item = items[0];
+          expect(item.querySelector('p').innerText).to.equal('latviešu valoda');
+          expect(item.querySelector('flag-icon').key).to.equal('us');
+        });
+
+        it('selecting a language should set [selected] and flag', function() {
+          var item = el.querySelector('paper-item');
+          var flag = el.querySelector('flag-icon.selected');
+          expect(el.selected).to.not.be.ok;
+          expect(flag.key).to.not.be.ok;
+          expect(item.dataset.locale).to.equal('lv');
+          item.click();
+          expect(el.selected).to.equal('lv');
+          expect(flag.key).to.equal('us');
+        });
+
+      });
+
+      // TODO: Fails because of paper-input
+      // a11ySuite('f-language-select-fixture');
+    </script>
+
+  </body>
+</html>
