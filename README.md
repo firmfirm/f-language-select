@@ -3,7 +3,9 @@
 A dropdown menu to select language, built with Polymer.
 
 Loads native language name using [maikudou/iso639-js](https://github.com/maikudou/iso639-js)
-and SVG flag icon using [Protoss78/flag-icon](https://github.com/Protoss78/flag-icon)
+and SVG flag icon using [Protoss78/flag-icon](https://github.com/Protoss78/flag-icon).
+
+For more information see [Component page](https://firmfirm.github.io/f-language-select/).
 
 ## Dependencies
 
