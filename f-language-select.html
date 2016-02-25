@@ -4,6 +4,7 @@
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../flag-icon/flag-icon.html">
 <link rel="import" href="../iso639-js/imports/iso639_enUS.html">
+<link rel="import" href="./f-language-select-behavior.html">
 
 <!--
 `<f-language-select>` is a dropdown menu to select language.
@@ -85,68 +86,31 @@ Example:
 </dom-module>
 
 <script>
-(function() {
+Polymer({
 
-  Polymer({
+  is: 'f-language-select',
+  behaviors: [FBehaviors.LanguageSelect],
 
-    is: 'f-language-select',
+  /*
+   * Open dropdown menu
+   */
+  open: function() {
+    this.$.langSelectMenu.open();
+  },
 
-    properties: {
-      /**
-       * Language options to choose from. Each item has the following format:
-       * ```json
-       * {
-       *   flag: String(ISO 3166-1 alpha-2),
-       *   lang: String(ISO 639-1)
-       * }```
-       *
-       * @default [ us:en, es:es lt:lt ]
-       */
-      options: {
-        type: Array,
-        notify: true,
-        value: function() {
-          return [
-            { flag: 'us', lang: 'en' },
-            { flag: 'es', lang: 'es' },
-            { flag: 'lt', lang: 'lt' }
-          ];
-        }
-      },
+  _languageName: function(code) {
+    var alpha3 = iso639.alpha2to3mapping[code];
+    var names = iso639.names[alpha3];
+    if (!names) return '?';
+    if (names.nativeName) return names.nativeName;
+    return names.name;
+  },
 
-      /*
-       * Selected option's `lang` property value.
-       */
-      selected: {
-        type: String,
-        notify: true
-      }
+  _flagFromLang: function(lang) {
+    return this.options.find(function(o) {
+      return o.lang === lang;
+    }).flag;
+  }
 
-    },
-
-    /*
-     * Open dropdown menu
-     */
-    open: function() {
-      this.$.langSelectMenu.open();
-    },
-
-    _languageName: function(code) {
-      var alpha3 = iso639.alpha2to3mapping[code];
-      var names = iso639.names[alpha3];
-      if (!names) return '?';
-      if (names.nativeName) return names.nativeName;
-      return names.name;
-    },
-
-    _flagFromLang: function(lang) {
-      console.log('_flagFromLang', lang);
-      return this.options.find(function(o) {
-        return o.lang === lang;
-      }).flag;
-    }
-
-  });
-
-})();
+});
 </script>
