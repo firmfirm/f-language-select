@@ -48,6 +48,10 @@
           expect(flag.key).to.equal('us');
         });
 
+        it('setting [selected] to null should do nothing', function() {
+          expect(()=>el.selected=null).not.throws()
+        });
+
       });
 
       // TODO: Fails because of paper-input

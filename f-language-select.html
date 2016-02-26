@@ -107,6 +107,7 @@ Polymer({
   },
 
   _flagFromLang: function(lang) {
+    if (!lang) return;
     return this.options.find(function(o) {
       return o.lang === lang;
     }).flag;
