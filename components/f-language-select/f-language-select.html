@@ -1,0 +1,118 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../flag-icon/flag-icon.html">
+<link rel="import" href="../iso639-js/imports/iso639_enUS.html">
+<link rel="import" href="./finterface-language-select.html">
+
+<!--
+`<f-language-select>` is a dropdown menu to select language.
+
+Loads native language name using [maikudou/iso639-js](https://github.com/maikudou/iso639-js)
+and SVG flag icon using [Protoss78/flag-icon](https://github.com/Protoss78/flag-icon)
+
+Example:
+
+    <f-language-select selected="en"></f-language-select>
+
+@demo demo/index.html
+-->
+<dom-module id="f-language-select">
+
+  <style>
+
+    :host {
+      margin: 0;
+      height: 40px;
+      box-sizing: border-box;
+      display: flex;
+    }
+
+    paper-dropdown-menu {
+      background: none;
+      padding: 0;
+
+      --paper-input-container-underline: {
+        display: none;
+      };
+
+      --paper-input-container-underline-focus: {
+        display: none;
+      };
+
+      --paper-input-container-input: {
+        text-align: center;
+      };
+    }
+
+    flag-icon {
+      height: 40px;
+      flex: 0 0 53.3333333333px;
+    }
+
+    .selected {
+      cursor: pointer;
+    }
+
+    paper-listbox {
+      width: 220px;
+      padding: 0;
+    }
+
+    paper-item {
+      padding: 0 0 0 10px;
+    }
+
+    paper-item > p {
+      padding: 0 0 0 15px;
+    }
+
+  </style>
+
+  <template>
+    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-click="open"></flag-icon>
+    <paper-dropdown-menu id="langSelectMenu" no-label-float>
+      <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
+        <template is="dom-repeat" items="[[options]]">
+          <paper-item data-locale$="[[item.lang]]">
+            <flag-icon key="[[item.flag]]"></flag-icon>
+            <p>[[_languageName(item.lang)]]</p>
+          </paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu>
+  </template>
+
+</dom-module>
+
+<script>
+Polymer({
+
+  is: 'f-language-select',
+  behaviors: [FInterface.LanguageSelect],
+
+  /*
+   * Open dropdown menu
+   */
+  open: function() {
+    this.$.langSelectMenu.open();
+  },
+
+  _languageName: function(code) {
+    var alpha3 = iso639.alpha2to3mapping[code];
+    var names = iso639.names[alpha3];
+    if (!names) return '?';
+    if (names.nativeName) return names.nativeName;
+    return names.name;
+  },
+
+  _flagFromLang: function(lang) {
+    if (!lang) return;
+    return this.options.find(function(o) {
+      return o.lang === lang;
+    }).flag;
+  }
+
+});
+</script>

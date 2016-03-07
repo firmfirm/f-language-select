@@ -1,0 +1,42 @@
+{
+  "name": "iso639-js",
+  "homepage": "https://github.com/maikudou/iso639-js",
+  "authors": [
+    "Mikhail Labanov <maikudou@gmail.com>"
+  ],
+  "description": "ISO639 language codes for use in javaScript applications",
+  "main": "iso639.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "iso639",
+    "languages",
+    "linguistics"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "reference",
+    "tools",
+    "locales",
+    "*.json",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maikudou/iso639-js.git"
+  },
+  "_release": "8268a6f",
+  "_resolution": {
+    "type": "commit",
+    "commit": "8268a6f"
+  },
+  "_source": "git://github.com/firmfirm/iso639-js.git",
+  "_target": "8268a6f",
+  "_originalSource": "firmfirm/iso639-js"
+}
