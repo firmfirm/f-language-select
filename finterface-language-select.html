@@ -1,5 +1,6 @@
-<script>
+<link rel="import" href="../polymer/polymer.html">
 
+<script>
 window.FInterface = window.FInterface || {};
 
 /**
@@ -7,38 +8,44 @@ window.FInterface = window.FInterface || {};
  *
  * @polymerBehavior
  */
-FInterface.LanguageSelect = {
-  properties: {
-    /**
-     * Language options to choose from. Each item has the following format:
-     * ```json
-     * {
-     *   flag: String(ISO 3166-1 alpha-2),
-     *   lang: String(ISO 639-1)
-     * }```
-     *
-     * @default [ us:en, es:es lt:lt ]
-     */
-    options: {
-      type: Array,
-      notify: true,
-      value: function() {
-        return [
-          { flag: 'us', lang: 'en' },
-          { flag: 'es', lang: 'es' },
-          { flag: 'lt', lang: 'lt' }
-        ];
-      }
-    },
+FInterface.LanguageSelect = Polymer.Utils.dedupingMixin(function(superClass) {
+  return class LanguageSelect extends superClass {
+    static get config() {
+      return {
+        properties: {
+          /**
+           * Language options to choose from. Each item has the following format:
+           * ```json
+           * {
+           *   flag: String(ISO 3166-1 alpha-2),
+           *   lang: String(ISO 639-1)
+           * }```
+           *
+           * @default [ us:en, es:es lt:lt ]
+           */
+          options: {
+            type: Array,
+            notify: true,
+            value: function() {
+              return [
+                { flag: 'us', lang: 'en' },
+                { flag: 'es', lang: 'es' },
+                { flag: 'lt', lang: 'lt' }
+              ];
+            }
+          },
 
-    /*
-     * Selected option's `lang` property value.
-     */
-    selected: {
-      type: String,
-      notify: true
+          /*
+           * Selected option's `lang` property value.
+           */
+          selected: {
+            type: String,
+            notify: true
+          }
+        }
+      }
     }
   }
-}
+});
 
 </script>

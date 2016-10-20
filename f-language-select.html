@@ -1,4 +1,3 @@
-<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
@@ -19,60 +18,66 @@ Example:
 @demo demo/index.html
 -->
 <dom-module id="f-language-select">
-
-  <style>
-
-    :host {
-      margin: 0;
-      height: 40px;
-      box-sizing: border-box;
-      display: flex;
-    }
-
-    paper-dropdown-menu {
-      background: none;
-      padding: 0;
-
-      --paper-input-container-underline: {
-        display: none;
-      };
-
-      --paper-input-container-underline-focus: {
-        display: none;
-      };
-
-      --paper-input-container-input: {
-        text-align: center;
-      };
-    }
-
-    flag-icon {
-      height: 40px;
-      flex: 0 0 53.3333333333px;
-    }
-
-    .selected {
-      cursor: pointer;
-    }
-
-    paper-listbox {
-      width: 220px;
-      padding: 0;
-    }
-
-    paper-item {
-      padding: 0 0 0 10px;
-    }
-
-    paper-item > p {
-      padding: 0 0 0 15px;
-    }
-
-  </style>
-
   <template>
-    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-click="open"></flag-icon>
-    <paper-dropdown-menu id="langSelectMenu" no-label-float>
+    <style>
+      :host {
+        margin: 0;
+        height: 40px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+      }
+
+      paper-dropdown-menu {
+        background: none;
+        padding: 0;
+
+        --paper-input-container-underline: {
+          display: none;
+        };
+
+        --paper-input-container-underline-focus: {
+          display: none;
+        };
+
+        --paper-input-container-input: {
+          text-align: center;
+        };
+      }
+
+      flag-icon {
+        height: 40px;
+        flex: 0 0 53.3333333333px;
+      }
+
+      /* TODO: remove when paper-dropdown-menu */
+      label {
+        margin-left: 10px;
+      }
+
+      .selected {
+        cursor: pointer;
+      }
+
+      paper-listbox {
+        width: 220px;
+        padding: 0;
+      }
+
+      paper-item {
+        padding: 0 0 0 10px;
+      }
+
+      paper-item > p {
+        padding: 0 0 0 15px;
+      }
+    </style>
+
+    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-click="toggle"></flag-icon>
+    <!-- /* TODO: remove when paper-dropdown-menu */ -->
+    <label for="langSelectMenu">[[_languageName(selected)]]</label>
+    <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
+    <iron-dropdown id="langSelectMenu" opened="{{opened}}">
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
           <paper-item data-locale$="[[item.lang]]">
@@ -81,38 +86,51 @@ Example:
           </paper-item>
         </template>
       </paper-listbox>
-    </paper-dropdown-menu>
+    </iron-dropdown>
+    <!-- </paper-dropdown-menu> -->
   </template>
 
+  <script>
+    window.FirmFirm = window.FirmFirm || {};
+    FirmFirm.LanguageSelect = class LanguageSelect extends FInterface.LanguageSelect(Polymer.Element) {
+      static get is() { return 'f-language-select'; }
+      static get config() {
+        return {
+          properties: {
+            opened: String,
+            /* TODO: remove when paper-dropdown-menu */
+            selected: {
+              observer: '_selectedChanged'
+            }
+          }
+        }
+      }
+
+      /*
+       * Toggle dropdown menu
+       */
+      toggle() {
+        this.opened = !this.opened;
+      }
+
+      /* TODO: remove when paper-dropdown-menu */
+      _selectedChanged() { this.opened = false; }
+
+      _languageName(code) {
+        var alpha3 = iso639.alpha2to3mapping[code];
+        var names = iso639.names[alpha3];
+        if (!names) return '?';
+        if (names.nativeName) return names.nativeName;
+        return names.name;
+      }
+
+      _flagFromLang(lang) {
+        if (!lang) return;
+        return this.options.find(function(o) {
+          return o.lang === lang;
+        }).flag;
+      }
+    }
+    customElements.define(FirmFirm.LanguageSelect.is, FirmFirm.LanguageSelect);
+  </script>
 </dom-module>
-
-<script>
-Polymer({
-
-  is: 'f-language-select',
-  behaviors: [FInterface.LanguageSelect],
-
-  /*
-   * Open dropdown menu
-   */
-  open: function() {
-    this.$.langSelectMenu.open();
-  },
-
-  _languageName: function(code) {
-    var alpha3 = iso639.alpha2to3mapping[code];
-    var names = iso639.names[alpha3];
-    if (!names) return '?';
-    if (names.nativeName) return names.nativeName;
-    return names.name;
-  },
-
-  _flagFromLang: function(lang) {
-    if (!lang) return;
-    return this.options.find(function(o) {
-      return o.lang === lang;
-    }).flag;
-  }
-
-});
-</script>

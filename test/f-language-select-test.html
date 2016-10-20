@@ -30,7 +30,7 @@
         });
 
         it('setting [languages] should set dropdown items', function() {
-          let items = el.querySelectorAll('paper-item');
+          let items = el.root.querySelectorAll('paper-item');
           expect(items).to.have.lengthOf(1);
           var item = items[0];
           expect(item.querySelector('p').innerText).to.equal('latviešu valoda');
@@ -38,8 +38,8 @@
         });
 
         it('selecting a language should set [selected] and flag', function() {
-          var item = el.querySelector('paper-item');
-          var flag = el.querySelector('flag-icon.selected');
+          var item = el.root.querySelector('paper-item');
+          var flag = el.root.querySelector('flag-icon.selected');
           expect(el.selected).to.not.be.ok;
           expect(flag.key).to.not.be.ok;
           expect(item.dataset.locale).to.equal('lv');

@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>f-language-select Demo</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../f-language-select.html">
   </head>
   <body unresolved>
 
     <p>An example of <code>&lt;f-language-select&gt;</code>:</p>
 
-    <template is="dom-bind">
-      <f-language-select selected="{{selected}}"></f-language-select>
-      <p>Selected: [[selected]]</p>
-    </template>
+    <dom-bind>
+      <template>
+        <f-language-select selected="{{selected}}"></f-language-select>
+        <p>Selected: [[selected]]</p>
+      </template>
+    </dom-bind>
 
   </body>
 </html>
