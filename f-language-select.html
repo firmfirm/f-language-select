@@ -20,12 +20,16 @@ Example:
 <dom-module id="f-language-select">
   <template>
     <style>
-      :host {
+      :host, header {
         margin: 0;
         height: 40px;
         box-sizing: border-box;
         display: flex;
+      }
+
+      header {
         align-items: center;
+        flex: 1 0 auto;
       }
 
       paper-dropdown-menu {
@@ -73,14 +77,16 @@ Example:
       }
     </style>
 
-    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-click="toggle"></flag-icon>
-    <!-- /* TODO: remove when paper-dropdown-menu */ -->
-    <label for="langSelectMenu">[[_languageName(selected)]]</label>
-    <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
+    <header on-tap="toggle">
+      <flag-icon class="selected" key="[[_flagFromLang(selected)]]"></flag-icon>
+      <!-- /* TODO: remove when paper-dropdown-menu */ -->
+      <label for="langSelectMenu">[[_languageName(selected)]]</label>
+      <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
+    </header>
     <iron-dropdown id="langSelectMenu" opened="{{opened}}">
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
-          <paper-item data-locale$="[[item.lang]]">
+          <paper-item data-locale$="[[item.lang]]" on-tap="_hide">
             <flag-icon key="[[item.flag]]"></flag-icon>
             <p>[[_languageName(item.lang)]]</p>
           </paper-item>
@@ -100,7 +106,7 @@ Example:
             opened: String,
             /* TODO: remove when paper-dropdown-menu */
             selected: {
-              observer: '_selectedChanged'
+              observer: '_hide'
             }
           }
         }
@@ -114,7 +120,7 @@ Example:
       }
 
       /* TODO: remove when paper-dropdown-menu */
-      _selectedChanged() { this.opened = false; }
+      _hide() { this.opened = false; }
 
       _languageName(code) {
         var alpha3 = iso639.alpha2to3mapping[code];
