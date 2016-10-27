@@ -33,7 +33,7 @@
           let items = el.root.querySelectorAll('paper-item');
           expect(items).to.have.lengthOf(1);
           var item = items[0];
-          expect(item.querySelector('p').innerText).to.equal('latviešu valoda');
+          expect(item.querySelector('span').innerText).to.equal('latviešu valoda');
           expect(item.querySelector('flag-icon').key).to.equal('us');
         });
 
