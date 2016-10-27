@@ -89,7 +89,7 @@ Example:
       <span for="langSelectMenu">[[_languageName(selected)]]</span>
       <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
     </header>
-    <iron-dropdown id="langSelectMenu" opened="{{opened}}" auto-fit-on-attach always-on-top>
+    <iron-dropdown id="langSelectMenu" opened="{{opened}}" always-on-top>
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
           <paper-item data-locale$="[[item.lang]]" on-tap="_hide">
