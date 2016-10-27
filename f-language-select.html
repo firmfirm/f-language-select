@@ -51,20 +51,26 @@ Example:
 
       flag-icon {
         height: 40px;
-        flex: 0 0 53.3333333333px;
+        width: 53.3333333333px;
+        flex: 0 0 auto;
       }
 
       /* TODO: remove when paper-dropdown-menu */
-      label {
-        margin-left: 10px;
+      span {
+        margin: 0 10px;
+        flex: 1 0 auto;
+        text-align: center;
       }
 
       .selected {
         cursor: pointer;
       }
 
+      header, paper-listbox {
+        min-width: 200px;
+      }
+
       paper-listbox {
-        width: 220px;
         padding: 0;
       }
 
@@ -80,15 +86,15 @@ Example:
     <header on-tap="toggle">
       <flag-icon class="selected" key="[[_flagFromLang(selected)]]"></flag-icon>
       <!-- /* TODO: remove when paper-dropdown-menu */ -->
-      <label for="langSelectMenu">[[_languageName(selected)]]</label>
+      <span for="langSelectMenu">[[_languageName(selected)]]</span>
       <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
     </header>
-    <iron-dropdown id="langSelectMenu" opened="{{opened}}">
+    <iron-dropdown id="langSelectMenu" opened="{{opened}}" auto-fit-on-attach always-on-top>
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
           <paper-item data-locale$="[[item.lang]]" on-tap="_hide">
             <flag-icon key="[[item.flag]]"></flag-icon>
-            <p>[[_languageName(item.lang)]]</p>
+            <span>[[_languageName(item.lang)]]</span>
           </paper-item>
         </template>
       </paper-listbox>
