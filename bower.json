@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#2.0-preview",
-    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
+    "paper-dropdown-menu": "firmfirm/paper-dropdown-menu#v2.0.0-alpha.1",
     "paper-menu-button": "PolymerElements/paper-menu-button#2.0-preview",
     "paper-item": "PolymerElements/paper-item#2.0-preview",
     "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",

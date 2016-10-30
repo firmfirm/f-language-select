@@ -30,6 +30,8 @@ Example:
       header {
         align-items: center;
         flex: 1 0 auto;
+        background: var(--primary-background-color);
+        color: var(--primary-text-color);
       }
 
       paper-dropdown-menu {
@@ -55,7 +57,6 @@ Example:
         flex: 0 0 auto;
       }
 
-      /* TODO: remove when paper-dropdown-menu */
       span {
         margin: 0 10px;
         flex: 1 0 auto;
@@ -64,10 +65,6 @@ Example:
 
       .selected {
         cursor: pointer;
-      }
-
-      header, paper-listbox {
-        min-width: 200px;
       }
 
       paper-listbox {
@@ -83,50 +80,27 @@ Example:
       }
     </style>
 
-    <header on-tap="toggle">
-      <flag-icon class="selected" key="[[_flagFromLang(selected)]]"></flag-icon>
+    <!-- <header>
       <!-- /* TODO: remove when paper-dropdown-menu */ -->
-      <span for="langSelectMenu">[[_languageName(selected)]]</span>
-      <!-- <paper-dropdown-menu id="langSelectMenu" no-label-float> -->
-    </header>
-    <iron-dropdown id="langSelectMenu" opened="{{opened}}" always-on-top>
+      <!-- <span for="langSelectMenu">[[_languageName(selected)]]</span>
+    </header> -->
+    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
+    <paper-dropdown-menu id="langSelectMenu" no-label-float opened="{{_opened}}">
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
-          <paper-item data-locale$="[[item.lang]]" on-tap="_hide">
+          <paper-item data-locale$="[[item.lang]]">
             <flag-icon key="[[item.flag]]"></flag-icon>
             <span>[[_languageName(item.lang)]]</span>
           </paper-item>
         </template>
       </paper-listbox>
-    </iron-dropdown>
-    <!-- </paper-dropdown-menu> -->
+    </paper-dropdown-menu>
   </template>
 
   <script>
     window.FirmFirm = window.FirmFirm || {};
     FirmFirm.LanguageSelect = class LanguageSelect extends FInterface.LanguageSelect(Polymer.Element) {
       static get is() { return 'f-language-select'; }
-      static get config() {
-        return {
-          properties: {
-            opened: String,
-            /* TODO: remove when paper-dropdown-menu */
-            selected: {
-              observer: '_hide'
-            }
-          }
-        }
-      }
-
-      /*
-       * Toggle dropdown menu
-       */
-      toggle() {
-        this.opened = !this.opened;
-      }
-
-      /* TODO: remove when paper-dropdown-menu */
-      _hide() { this.opened = false; }
 
       _languageName(code) {
         var alpha3 = iso639.alpha2to3mapping[code];
@@ -141,6 +115,10 @@ Example:
         return this.options.find(function(o) {
           return o.lang === lang;
         }).flag;
+      }
+
+      _toggle() {
+        this._opened = !this._opened;
       }
     }
     customElements.define(FirmFirm.LanguageSelect.is, FirmFirm.LanguageSelect);
