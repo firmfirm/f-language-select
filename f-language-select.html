@@ -20,18 +20,16 @@ Example:
 <dom-module id="f-language-select">
   <template>
     <style>
-      :host, header {
+      :host {
         margin: 0;
         height: 40px;
         box-sizing: border-box;
         display: flex;
-      }
 
-      header {
-        align-items: center;
-        flex: 1 0 auto;
-        background: var(--primary-background-color);
-        color: var(--primary-text-color);
+        --paper-menu-button: {
+          background: var(--primary-background-color);
+          color: var(--primary-text-color);
+        };
       }
 
       paper-dropdown-menu {
@@ -80,10 +78,6 @@ Example:
       }
     </style>
 
-    <!-- <header>
-      <!-- /* TODO: remove when paper-dropdown-menu */ -->
-      <!-- <span for="langSelectMenu">[[_languageName(selected)]]</span>
-    </header> -->
     <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
     <paper-dropdown-menu id="langSelectMenu" no-label-float opened="{{_opened}}">
       <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
