@@ -20,12 +20,25 @@ Example:
 <dom-module id="f-language-select">
   <template>
     <style>
+      :host {
+        display: flex;
+        align-items: center;
+      }
+      flag-icon { width: 80px; height: 60px; }
 
       paper-dropdown-menu {
         --paper-input-container-input: {
           text-align: center;
+          font-size: 1.2em;
+        };
+        --paper-input-container-underline: {
+          display: none;
         };
       }
+
+      paper-item { margin-bottom: 8px; }
+      paper-item span { margin-left: 8px; }
+      paper-item:last-of-type { margin-bottom: 0; }
 
     </style>
 
