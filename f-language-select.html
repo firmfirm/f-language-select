@@ -20,62 +20,13 @@ Example:
 <dom-module id="f-language-select">
   <template>
     <style>
-      :host {
-        margin: 0;
-        height: 40px;
-        box-sizing: border-box;
-        display: flex;
-
-        --paper-menu-button: {
-          background: var(--primary-background-color);
-          color: var(--primary-text-color);
-        };
-      }
 
       paper-dropdown-menu {
-        background: none;
-        padding: 0;
-
-        --paper-input-container-underline: {
-          display: none;
-        };
-
-        --paper-input-container-underline-focus: {
-          display: none;
-        };
-
         --paper-input-container-input: {
           text-align: center;
         };
       }
 
-      flag-icon {
-        height: 40px;
-        width: 53.3333333333px;
-        flex: 0 0 auto;
-      }
-
-      span {
-        margin: 0 10px;
-        flex: 1 0 auto;
-        text-align: center;
-      }
-
-      .selected {
-        cursor: pointer;
-      }
-
-      paper-listbox {
-        padding: 0;
-      }
-
-      paper-item {
-        padding: 0 0 0 10px;
-      }
-
-      paper-item > p {
-        padding: 0 0 0 15px;
-      }
     </style>
 
     <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
