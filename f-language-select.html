@@ -47,7 +47,7 @@ Example:
 
     <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
     <paper-dropdown-menu id="langSelectMenu" no-label-float opened="{{_opened}}">
-      <paper-listbox class="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
+      <paper-listbox slot="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
           <paper-item data-locale$="[[item.lang]]">
             <flag-icon key="[[item.flag]]"></flag-icon>
