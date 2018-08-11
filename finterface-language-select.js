@@ -1,6 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
-
-<script>
+import '@polymer/polymer/polymer-legacy.js';
+import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
 window.FInterface = window.FInterface || {};
 
 /**
@@ -8,7 +7,7 @@ window.FInterface = window.FInterface || {};
  *
  * @polymerBehavior
  */
-FInterface.LanguageSelect = Polymer.dedupingMixin(function(superClass) {
+FInterface.LanguageSelect = dedupingMixin(function(superClass) {
   return class LanguageSelect extends superClass {
     static get properties() {
       return {
@@ -45,5 +44,3 @@ FInterface.LanguageSelect = Polymer.dedupingMixin(function(superClass) {
     }
   }
 });
-
-</script>

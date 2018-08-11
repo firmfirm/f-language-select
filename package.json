@@ -1,0 +1,37 @@
+{
+  "name": "f-language-select",
+  "version": "2.5.0",
+  "description": "A dropdown menu to select language.",
+  "scripts": {
+    "test": "polymer test --npm",
+    "start": "polymer serve --npm"
+  },
+  "keywords": [
+    "web-components",
+    "language",
+    "country",
+    "i18n",
+    "dropdown",
+    "select",
+    "polymer"
+  ],
+  "homepage": "https://github.com/firmfirm/f-language-select/",
+  "main": "f-language-select.js",
+  "author": "Martynas <martynas@firmfirm.co>",
+  "license": "MIT",
+  "dependencies": {
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.18",
+    "@polymer/paper-item": "^3.0.0-pre.18",
+    "@polymer/paper-listbox": "^3.0.0-pre.18",
+    "@polymer/paper-menu-button": "^3.0.0-pre.18",
+    "@polymer/polymer": "^3.0.0",
+    "flag-icon": "^2.5.0",
+    "iso639-js": "^1.1.3"
+  },
+  "devDependencies": {
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.1",
+    "web-animations-js": "^2.3.1"
+  }
+}
