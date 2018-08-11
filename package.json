@@ -1,6 +1,6 @@
 {
   "name": "f-language-select",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "A dropdown menu to select language.",
   "scripts": {
     "test": "polymer test --npm",
