@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@mkazlauskas/iso639-js@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@mkazlauskas/iso639-js/-/iso639-js-1.1.3.tgz#a32667160f9d264c225f541a1437100eee8b4eab"
+
 "@polymer/app-layout@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/app-layout/-/app-layout-3.0.0-pre.21.tgz#d6312cfd3ccb70112996049334b550371cdae867"
@@ -512,10 +516,6 @@ inflight@^1.0.4:
 inherits@2, inherits@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
-
-iso639-js@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/iso639-js/-/iso639-js-1.1.3.tgz#3d030f7f1039cc88c8c8cb2f2437346e1b707e85"
 
 json3@3.3.2:
   version "3.3.2"

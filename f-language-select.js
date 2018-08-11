@@ -20,7 +20,7 @@ import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import 'flag-icon/flag-icon.js';
-import 'iso639-js/iso639_enUS.js';
+import '@mkazlauskas/iso639-js/iso639_enUS.js';
 import './finterface-language-select.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 window.FirmFirm = window.FirmFirm || {};
