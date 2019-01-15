@@ -2,8 +2,8 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../flag-icon/flag-icon.html">
-<link rel="import" href="../iso639-js/imports/iso639_enUS.html">
 <link rel="import" href="./finterface-language-select.html">
+<link rel="import" href="./f-lang-name-mixin.html">
 
 <!--
 `<f-language-select>` is a dropdown menu to select language.
@@ -50,13 +50,13 @@ Example:
 
     </style>
 
-    <flag-icon class="selected" key="[[_flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
-    <paper-dropdown-menu id="langSelectMenu" no-label-float opened="{{_opened}}">
+    <flag-icon class="selected" key="[[flagFromLang(selected)]]" on-tap="_toggle"></flag-icon>
+    <paper-dropdown-menu id="langSelectMenu" disabled="[[disabled]]" no-label-float opened="{{_opened}}">
       <paper-listbox slot="dropdown-content" attr-for-selected="data-locale" selected="{{selected}}">
         <template is="dom-repeat" items="[[options]]">
           <paper-item data-locale$="[[item.lang]]">
             <flag-icon key="[[item.flag]]"></flag-icon>
-            <span>[[_languageName(item.lang)]]</span>
+            <span>[[languageName(item.lang)]]</span>
           </paper-item>
         </template>
       </paper-listbox>
@@ -65,23 +65,13 @@ Example:
 
   <script>
     window.FirmFirm = window.FirmFirm || {};
-    FirmFirm.LanguageSelect = class LanguageSelect extends FInterface.LanguageSelect(Polymer.Element) {
+    FirmFirm.LanguageSelect = class LanguageSelect extends FInterface.LanguageSelect(FirmFirm.LangNameMixin(Polymer.Element)) {
       static get is() { return 'f-language-select'; }
 
-      _languageName(code) {
-        var alpha3 = iso639.alpha2to3mapping[code];
-        var names = iso639.names[alpha3];
-        if (!names) return '?';
-        if (names.nativeName) return names.nativeName;
-        return names.name;
-      }
-
-      _flagFromLang(lang) {
-        if (!lang) return;
-        const opt = this.options.find(function(o) {
-          return o.lang === lang;
-        });
-        if (opt) return opt.flag;
+      static get properties() {
+        return {
+          disabled: Boolean,
+        };
       }
 
       _toggle() {

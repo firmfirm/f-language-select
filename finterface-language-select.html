@@ -43,6 +43,14 @@ FInterface.LanguageSelect = Polymer.dedupingMixin(function(superClass) {
         }
       };
     }
+
+    flagFromLang(lang) {
+      if (!lang || !this.options) return;
+      const opt = this.options.find(function(o) {
+        return o.lang === lang;
+      });
+      if (opt) return opt.flag;
+    }
   }
 });
 

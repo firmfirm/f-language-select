@@ -1,0 +1,16 @@
+<link rel="import" href="../iso639-js/imports/iso639_enUS.html">
+
+<script>
+  window.FirmFirm = window.FirmFirm || {};
+  FirmFirm.LangNameMixin = Polymer.dedupingMixin(function(superClass) {
+    return class LangNameMixin extends Polymer.MutableData(superClass) {
+      languageName(code) {
+        var alpha3 = code.length === 3 ? code : iso639.alpha2to3mapping[code];
+        var names = iso639.names[alpha3];
+        if (!names) return '?';
+        if (names.nativeName) return names.nativeName;
+        return names.name;
+      }
+    }
+  });
+</script>
